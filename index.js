@@ -39,9 +39,32 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+};
 
-}
+const kells = new Person('Kelli', 29);
+
+Person.prototype.eat = function eat(someFood) {
+  if (this.stomach.length < 10) {
+    this.stomach.push(someFood)
+  }
+};
+Person.prototype.poop = function poop() {
+  return this.stomach.length = 0;
+};
+Person.prototype.toString = function idToString() {
+  return `${this.name} ${this.age}`;
+};
+
+const age = new Person(29);
+
+
+
+  
+  
 
 /*
   TASK 2
@@ -57,9 +80,32 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
+function Car(model, milesPerGallon) {
 
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+Car.prototype.fill = function(gallons){
+  this.tank = this.tank+gallons;
+}
+Car.prototype.drive = function(distance){
+
+  if (this.tank >= distance/this.milesPerGallon){
+    this.odometer = this.odometer + distance;
+    this.tank = this.tank - (distance/this.milesPerGallon)}
+
+  else {
+    this.odometer = this.odometer + (this.tank * this.milesPerGallon)
+    this.tank = 0;
+
+    return `I ran out of fuel at ${this.odometer} miles on the odometer!`
+  }
+}
+
+  
+ 
 
 /*
   TASK 3
@@ -68,18 +114,26 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name, age, favoriteToy) {
+  this.name = name;
+  this.age = age;
+  this.favoriteToy = favoriteToy;
+}
+Baby.prototype = Object.create (Person.prototype);
+Baby.prototype.play = function(){
+  
+  return `Playing with ${this.favoriteToy}`
 }
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Window/Global Object Binding - the value of "this" will be the window/console object when in the global scope
+  2. Implicit Binding - the object before the dot is "this" whenever an earlier dot calls a function
+  3. New Binding - "this" refers to the identified instance of the object that is created and returned by the constructor function
+      whenever one is used
+  4. Explicit Binding - "this" is clearly defined when we use JS call or apply
 */
 
 
